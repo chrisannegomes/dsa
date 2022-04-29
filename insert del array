@@ -1,0 +1,138 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+int choice;
+cout<<"1. Sum & Average \n";
+cout<<"2. Highest & Lowest \n";
+cout<<"3. Insert \n";
+cout<<"4. Delete \n";
+cout<<"5. Exit \n";
+cout<<"Enter your choice: \n";
+cin>>choice;
+switch(choice)
+{
+case 1:{
+int i,n;
+double sum=0,avg=0;
+cout<<"Enter the number of elements in the array: \n";
+cin>>n;
+int ar[n];
+cout<<"Enter the "<< n <<" elements: \n";
+for(i=0;i<n;i++)
+{
+cout<<"Input ar["<<i<<"]: ";
+cin>>ar[i];
+}
+cout<<"The elements of the array are - \n";
+for(i=0;i<n;i++)
+{
+cout<<"ar["<<i<<"] ~ "<<ar[i]<<endl;
+sum+=ar[i];
+}
+avg=sum/n;
+cout<<"The sum of the elements is "<<sum<<endl;
+cout<<"The average of the elements is "<<avg<<endl;
+}break;
+case 2:{
+int j,nu,low,high;
+cout<<"Enter the number of elements in the array: \n";
+cin>>nu;
+int arr[nu];
+cout<<"Enter the "<< nu <<" elements: \n";
+for(j=0;j<nu;j++)
+{
+cin>>arr[j];
+}
+high=arr[0];
+for(j=0;j<nu;j++)
+{
+if(high<arr[j])
+{
+high=arr[j];
+}
+}
+low=arr[0];
+for(j=0;j<nu;j++)
+{
+if(low>arr[j])
+{
+low=arr[j];
+}
+}
+cout<<"The highest element is "<<high<<endl;
+cout<<"The lowest element is "<<low<<endl;
+}break;
+case 3:{
+int k,num,loc,element;
+cout<<"Enter the number of elements in the array: \n";
+cin>>num;
+int arra[num];
+cout<<"Enter the "<< num <<" elements: \n";
+for(k=0;k<num;k++)
+{
+cin>>arra[k];
+}
+cout<<"Before insertion- \n";
+for(k=0;k<num;k++)
+{
+cout<<arra[k]<<" ";
+}
+cout<<"\nEnter the element to insert: \n";
+cin>>element;
+cout<<"Enter the position in which you want to insert "<<element<<"~ \n";
+cin>>loc;
+loc--;
+for(k=num-1;k>=loc;k--)
+{
+arra[k+1]=arra[k];
+}
+arra[loc]=element;
+cout<<"After insertion- \n";
+for(k=0;k<num+1;k++)
+{
+cout<<arra[k]<<" ";
+}
+}break;
+case 4:{
+int l,x,numb,ele;
+cout<<"Enter the number of elements in the array: \n";
+cin>>numb;
+int array[numb];
+cout<<"Enter the "<< numb <<" elements: \n";
+for(l=0;l<numb;l++)
+{
+cin>>array[l];
+}
+cout<<"Before deletion- \n";
+for(l=0;l<numb;l++)
+{
+cout<<array[l]<<" ";
+}
+cout<<"\nEnter the element to delete: \n";
+cin>>ele;
+for(l=0;l<numb;l++)
+{
+if(array[l]==ele)
+{
+for(x=l;x<(numb-1);x++)
+{
+array[x]=array[x+1];
+}
+break;
+}
+}
+cout<<"After deletion- \n";
+for(l=0;l<(numb-1);l++)
+{
+cout<<array[l]<<" ";
+}
+}break;
+case 5:{
+cout<<"bye-bye";
+}break;
+default:
+cout<<"Invalid Input! \nplease try again.";
+}
+return 0;
+}
