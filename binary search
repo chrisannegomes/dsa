@@ -1,0 +1,158 @@
+#include <iostream>
+using namespace std;
+
+struct node
+{
+    int data;
+    struct node *left = NULL;
+    struct node *right = NULL;
+};
+
+struct node *root = NULL;
+
+void insertele(int val)
+{
+    struct node *newnode = new node;
+    if (root == NULL)
+    {
+        newnode->left = NULL;
+        newnode->right = NULL;
+        newnode->data = val;
+        root = newnode;
+    }
+    else
+    {
+        struct node *temp = root;
+        newnode->data = val;
+        while (temp != NULL)
+        {
+            if (newnode->data == temp->data)
+            {
+                cout << "no duplicates are allowed!" << endl;
+                break;
+            }
+            else if ((newnode->data < temp->data) && (temp->left == NULL))
+            {
+                temp->left = newnode;
+                break;
+            }
+            else if (newnode->data < temp->data)
+            {
+                temp = temp->left;
+            }
+            else if ((newnode->data > temp->data) && (temp->right == NULL))
+            {
+                temp->right = newnode;
+                break;
+            }
+            else
+            {
+                temp = temp->right;
+            }
+        }
+    }
+}
+
+void search(node *temp, int value)
+{
+    if (temp != NULL)
+    {
+        if (temp->data == value)
+            cout << "element found!" << endl;
+        else if (value < temp->data)
+            return search(temp->left, value);
+        else
+            return search(temp->right, value);
+    }
+    else
+        cout << "the element is not present" << endl;
+}
+
+
+void inorder(struct node *root)
+{
+    if (root != NULL)
+    {
+        inorder(root->left);
+        cout << root->data << " ";
+        inorder(root->right);
+    }
+    else if(root==NULL)
+    {
+        cout<<"no elements present!"<<endl;
+    }
+}
+
+void preorder(struct node *root)
+{
+    if (root != NULL)
+    {
+        cout << root->data << "  ";
+        preorder(root->left);
+        preorder(root->right);
+    }
+    else if(root==NULL)
+    {
+        cout<<"no elements present!"<<endl;
+    }
+}
+
+void postorder(struct node *root)
+{
+    if (root != NULL)
+    {
+        postorder(root->left);
+        postorder(root->right);
+        cout << root->data << "  ";
+    }
+    else if(root==NULL)
+    {
+        cout<<"no elements present!"<<endl;
+    }
+}
+
+
+int main()
+{
+    int c, ele;
+    do
+    {
+        cout << "1. insert" << endl;
+        cout << "2. search" << endl;
+        cout << "3. inorder" << endl;
+        cout << "4. preorder" << endl;
+        cout << "5. postorder" << endl;
+        cout << "enter your choice:\npress '0' to exit.." << endl;
+        cin >> c;
+        switch (c)
+        {
+        case 0:
+            cout << "bye-bye" << endl;
+            exit(c);
+            break;
+        case 1:
+            cout << "enter the element to be inserted:" << endl;
+            cin >> ele;
+            insertele(ele);
+            break;
+        case 2: 
+            cout << "enter the element to search:" << endl;
+            cin >> ele;
+            search(root,ele);
+            break;
+
+        case 3:
+            inorder(root);
+            break;
+        case 4:
+            preorder(root);
+            break;
+        case 5:
+            postorder(root);
+            break;
+        default:
+            cout << "Invalid Choice" << endl;
+            break;
+        }
+    } while (c != 0);
+}
